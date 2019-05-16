@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:element name="celler">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="productes">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="producte" type="xs:string" maxOccurs="unbounded">
+                                <xs:complexType>
+                                    <xs:attribute name="id" type="xs:id" use="required" />
+                                    <xs:attribute name="preu" type="xs:double" use="required" />
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="clients">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="client" maxOccurs="unbounded">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="nom" type="xs:string" />
+                                        <xs:element name="llinatges" type="xs:string" />
+                                        <xs:element name="contacte" maxOccurs="4">
+                                            <xs:complexType>
+                                                <xs:choice>
+                                                    <xs:element name="fix" type="xs:string" default="privat">
+                                                        <xs:simpleType>
+                                                            <xs:restriction>
+                                                                <xs:enumeration value="privat" />
+                                                                <xs:enumeration value="feina" />
+                                                            </xs:restriction>
+                                                        </xs:simpleType>
+                                                    </xs:element>
+                                                    <xs:element name="mobil" type="xs:string" default="privat">
+                                                        <xs:simpleType>
+                                                            <xs:restriction>
+                                                                <xs:enumeration value="privat" />
+                                                                <xs:enumeration value="feina" />
+                                                            </xs:restriction>
+                                                        </xs:simpleType>
+                                                    </xs:element>
+                                                </xs:choice>
+                                            </xs:complexType>
+                                        </xs:element>
+                                    </xs:sequence>
+                                    <xs:attribute name="id" type="xs:id" use="required" />
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="factures">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="factura" maxOccurs="unbounded">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="comprador">
+                                        <xs:complexType>
+                                            <xs:attribute name="idClient" type="IDREF"/>
+                                        </xs:complexType>
+                                        </xs:element>
+                                    </xs:sequence>
+                                    <xs:attribute name="numero" type="xs:id" use="required" />
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
