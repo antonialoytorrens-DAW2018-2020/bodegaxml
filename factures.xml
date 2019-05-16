@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE celler [
+<!ELEMENT celler (productes, factures)>
+    <!ELEMENT productes (producte+)>
+        <!ELEMENT producte (tipus, format, capacitat, preu)>
+                <!ATTLIST producte codi ID #REQUIRED>
+                    <!ELEMENT tipus (#PCDATA)>
+                    <!ELEMENT format (#PCDATA)>
+                    <!ELEMENT capacitat (#PCDATA)>
+                    <!ELEMENT preu (#PCDATA)>
+    <!ELEMENT factures (factura+)>
+        <!ELEMENT factura (client, linia+, total)>
+            <!ATTLIST factura numero ID #REQUIRED>
+            <!ATTLIST factura data CDATA #REQUIRED>
+        <!ELEMENT client (nom, llinatges, contacte+)>
+            <!ATTLIST client codi ID #REQUIRED>
+                <!ELEMENT nom (#PCDATA)>
+                <!ELEMENT llinatges (#PCDATA)>
+                <!ELEMENT contacte (telefon+)>
+                    <!ELEMENT telefon (#PCDATA)>
+                        <!ATTLIST telefon tipus CDATA #REQUIRED>
+        <!ELEMENT linia (quantitat, preu)>
+            <!ATTLIST linia producteid IDREF #REQUIRED>
+            <!ELEMENT quantitat (#PCDATA)>
+            <!ELEMENT subtotal (#PCDATA)>
+        <!ELEMENT total (linies, import, impost, venta)>
+            <!ELEMENT linies (#PCDATA)>
+            <!ELEMENT import (#PCDATA)>
+            <!ELEMENT impost (#PCDATA)>
+            <!ELEMENT venta (#PCDATA)>
+]>
+<celler>
+    <productes>
+        <producte codi="B1001">
+            <tipus>Blanc</tipus>
+            <format>Botella</format>
+            <capacitat>2</capacitat>
+            <preu>60</preu>
+        </producte>
+        <producte codi="B1002">
+            <tipus>Blanc</tipus>
+            <format>Garrafa</format>
+            <capacitat>3</capacitat>
+            <preu>75</preu>
+        </producte>
+        <producte codi="B1003">
+            <tipus>Blanc</tipus>
+            <format>Garrafa</format>
+            <capacitat>5</capacitat>
+            <preu>120</preu>
+        </producte>
+        <producte codi="N2001">
+            <tipus>Negre</tipus>
+            <format>Garrafa</format>
+            <capacitat>5</capacitat>
+            <preu>120</preu>
+        </producte>
+        <producte codi="N2002">
+            <tipus>Negre</tipus>
+            <format>Garrafa</format>
+            <capacitat>5</capacitat>
+            <preu>120</preu>
+        </producte>
+        <producte codi="R3001">
+            <tipus>Rosat</tipus>
+            <format>Garrafa</format>
+            <capacitat>5</capacitat>
+            <preu>90</preu>
+        </producte>
+        <producte codi="R3002">
+            <tipus>Rosat</tipus>
+            <format>Botella</format>
+            <capacitat>1</capacitat>
+            <preu>20</preu>
+        </producte>
+    </productes>
+    <factures>
+        <factura numero="F1234" data="20/03/19">
+           <client codi="C1">
+                <nom>Joan</nom>
+                <llinatges>Pere Sales</llinatges>
+                <contacte>
+                    <telefon tipus="fix">6367165514</telefon>
+                    <telefon tipus="movil">8579597158</telefon>
+                    <telefon tipus="fix">908864331</telefon>
+                </contacte>
+            </client>
+            <linia producteid="B1001">
+                <quantitat>3</quantitat>
+                <preu>180</preu>
+            </linia>
+            <total>
+                <linies>1</linies>
+                <import>180</import>
+                <impost>21</impost>
+                <venta>217,8</venta>
+            </total>
+        </factura>
+        <factura numero="F1235" data="20/03/19">
+           <client codi="C2">
+                <nom>Tomàs</nom>
+                <llinatges>Galguera Baro</llinatges>
+                <contacte>
+                     <telefon tipus="fix">6511312159</telefon>
+                    <telefon tipus="movil">6897713110</telefon>
+                    <telefon tipus="fix">8424474678</telefon>
+                </contacte>
+            </client>
+            <linia producteid="B1001">
+                <quantitat>2</quantitat>
+                <preu>120</preu>
+            </linia>
+            <linia producteid="N2001">
+                <quantitat>1</quantitat>
+                <preu>120</preu>
+            </linia>
+            <total>
+                <linies>2</linies>
+                <import>240</import>
+                <impost>21</impost>
+                <venta>290,4</venta>
+            </total>
+        </factura>
+    </factures>
+</celler>
