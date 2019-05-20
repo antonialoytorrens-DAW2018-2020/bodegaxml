@@ -6,10 +6,14 @@
                 <xs:element name="productes">
                     <xs:complexType>
                         <xs:sequence>
-                            <xs:element name="producte" type="xs:string" maxOccurs="unbounded">
+                            <xs:element name="producte" maxOccurs="unbounded">
                                 <xs:complexType>
-                                    <xs:attribute name="id" type="xs:ID" use="required" />
-                                    <xs:attribute name="preu" type="xs:double" use="required" />
+                                    <xs:simpleContent>
+                                        <xs:extension base="xs:string">
+                                            <xs:attribute name="id" type="xs:ID" use="required" />
+                                            <xs:attribute name="preu" type="xs:double" use="required" />
+                                        </xs:extension>
+                                    </xs:simpleContent>
                                 </xs:complexType>
                             </xs:element>
                         </xs:sequence>
@@ -25,22 +29,38 @@
                                         <xs:element name="llinatges" type="xs:string" />
                                         <xs:element name="contacte" maxOccurs="4">
                                             <xs:complexType>
-                                                <xs:choice>
-                                                    <xs:element name="fix" type="xs:string" default="privat">
-                                                        <xs:simpleType>
-                                                            <xs:restriction>
-                                                                <xs:enumeration value="privat" />
-                                                                <xs:enumeration value="feina" />
-                                                            </xs:restriction>
-                                                        </xs:simpleType>
+                                                <xs:choice maxOccurs="unbounded">
+                                                    <xs:element name="fix" default="privat">
+                                                        <xs:complexType>
+                                                            <xs:simpleContent>
+                                                                <xs:extension base="xs:string">
+                                                                    <xs:attribute name="tipus">
+                                                                        <xs:simpleType>
+                                                                            <xs:restriction base="xs:string">
+                                                                                <xs:enumeration value="privat" />
+                                                                                <xs:enumeration value="feina" />
+                                                                            </xs:restriction>
+                                                                        </xs:simpleType>
+                                                                    </xs:attribute>
+                                                                </xs:extension>
+                                                            </xs:simpleContent>
+                                                        </xs:complexType>
                                                     </xs:element>
-                                                    <xs:element name="mobil" type="xs:string" default="privat">
-                                                        <xs:simpleType>
-                                                            <xs:restriction>
-                                                                <xs:enumeration value="privat" />
-                                                                <xs:enumeration value="feina" />
-                                                            </xs:restriction>
-                                                        </xs:simpleType>
+                                                    <xs:element name="mobil" default="privat">
+                                                        <xs:complexType>
+                                                            <xs:simpleContent>
+                                                                <xs:extension base="xs:string">
+                                                                    <xs:attribute name="tipus">
+                                                                        <xs:simpleType>
+                                                                            <xs:restriction base="xs:string">
+                                                                                <xs:enumeration value="privat" />
+                                                                                <xs:enumeration value="feina" />
+                                                                            </xs:restriction>
+                                                                        </xs:simpleType>
+                                                                    </xs:attribute>
+                                                                </xs:extension>
+                                                            </xs:simpleContent>
+                                                        </xs:complexType>
                                                     </xs:element>
                                                 </xs:choice>
                                             </xs:complexType>
@@ -59,13 +79,17 @@
                                 <xs:complexType>
                                     <xs:sequence>
                                         <xs:element name="comprador">
-                                        <xs:complexType>
-                                            <xs:attribute name="idClient" type="xs:IDREF"/>
-                                        </xs:complexType>
-                                        </xs:element>
-                                        <xs:element name="unitats" type="xs:integer" maxOccurs="unbounded">
                                             <xs:complexType>
-                                                <xs:attribute name="idVi" type="xs:IDREF"></xs:attribute>
+                                                <xs:attribute name="idClient" type="xs:IDREF" />
+                                            </xs:complexType>
+                                        </xs:element>
+                                        <xs:element name="unitats" maxOccurs="unbounded">
+                                            <xs:complexType>
+                                                <xs:simpleContent>
+                                                    <xs:extension base="xs:integer">
+                                                        <xs:attribute name="idVi" type="xs:IDREF" use="required" />
+                                                    </xs:extension>
+                                                </xs:simpleContent>
                                             </xs:complexType>
                                         </xs:element>
                                     </xs:sequence>

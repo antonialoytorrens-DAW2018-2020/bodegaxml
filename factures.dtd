@@ -1,0 +1,22 @@
+<!ELEMENT celler (productes, clients, factures)>
+  <!ELEMENT productes (producte)+>
+    <!ELEMENT producte (#PCDATA)>
+      <!ATTLIST producte id ID #REQUIRED>
+      <!ATTLIST producte preu CDATA #REQUIRED>
+  <!ELEMENT clients (client)+>
+    <!ELEMENT client (nom, llinatges, contacte)>
+      <!ATTLIST client id ID #REQUIRED>
+      <!ELEMENT nom (#PCDATA)>
+      <!ELEMENT llinatges (#PCDATA)>
+      <!ELEMENT contacte (mobil | fix)+>
+        <!ELEMENT mobil (#PCDATA)>
+          <!ATTLIST mobil tipus (privat | feina) "privat">
+        <!ELEMENT fix (#PCDATA)>
+          <!ATTLIST fix tipus (privat | feina) "privat">
+  <!ELEMENT factures (factura)+>
+    <!ELEMENT factura (comprador, unitats+)>
+      <!ATTLIST factura numero ID #REQUIRED>
+      <!ELEMENT comprador EMPTY>
+        <!ATTLIST comprador idClient IDREF #REQUIRED>
+      <!ELEMENT unitats (#PCDATA)>
+        <!ATTLIST unitats idVi IDREF #REQUIRED>
